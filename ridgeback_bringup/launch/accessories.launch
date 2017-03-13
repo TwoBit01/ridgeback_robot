@@ -46,8 +46,8 @@ in the URDF. See ridgeback_description/urdf/accessories.urdf.xacro.
 
   <!-- Optional Sick S300-series LIDAR, generally is front-facing but support for addtional rear. -->
   <group if="$(optenv RIDGEBACK_FRONT_S300_LASER 0)">
-    <node pkg="cob_sick_s300" name="s300_rear" type="cob_sick_s300">
-      <param name="host" value="$(optenv RIDGEBACK_FRONT_S300_PORT /dev/clearpath/s300_front)" />
+    <node pkg="cob_sick_s300" name="s300_front" type="cob_sick_s300">
+      <param name="port" value="$(optenv RIDGEBACK_FRONT_S300_PORT /dev/clearpath/s300_front)" />
       <param name="frame_id" value="front_laser" />
       <remap from="scan" to="front/scan" />
     </node>
@@ -55,14 +55,14 @@ in the URDF. See ridgeback_description/urdf/accessories.urdf.xacro.
 
   <group if="$(optenv RIDGEBACK_REAR_S300_LASER 0)">
     <node pkg="cob_sick_s300" name="s300_rear" type="cob_sick_s300">
-      <param name="host" value="$(optenv RIDGEBACK_REAR_S300_PORT /dev/clearpath/s300_rear)" />
+      <param name="port" value="$(optenv RIDGEBACK_REAR_S300_PORT /dev/clearpath/s300_rear)" />
       <param name="frame_id" value="rear_laser" />
       <remap from="scan" to="rear/scan" />
     </node>
   </group>
 
 
-  <group if="$(optenv RIDGEBACK_REAR_S300_LASER 0)">
+  <group if="$(optenv RIDGEBACK_MICROSTRAIN_IMU 0)">
     <node pkg="microstrain_3dmgx2_imu" type="imu_node" name="microstrain_imu">
       <param name="time_offset" value="-0.040" />
       <param name="port" value="$(optenv RIDGEBACK_MICROSTRAIN_IMU_PORT /dev/microstrain)" />
